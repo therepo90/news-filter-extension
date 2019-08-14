@@ -10,7 +10,7 @@
     },
     "content_scripts": [
         {
-            "matches": ["https://www.wykop.pl/"],
+            "matches": ["https://www.wykop.pl/", "https://www.wykop.pl/strona/*"],
             "js": ["main.js"],
             "run_at": "document_end"
         }
