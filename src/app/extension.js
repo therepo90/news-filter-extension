@@ -5,7 +5,7 @@ import { allSentencesMatcher } from './matchers';
 export const packageName = 'Bad news filter';
 const hiddenElements = [];
 
-function findParentLink(el) {
+const findParentLink = el => {
     let node = el.parentNode;
     while (node != document.body) {
         if(node.matches('.link')) {
@@ -14,7 +14,7 @@ function findParentLink(el) {
         node = node.parentNode;
     }
     return node;
-}
+};
 
 export const runExtension = async () => {
     logger.log(`%c${packageName} %cextension running`, 'color: green;font-size:16px;', 'color:black;');
@@ -33,6 +33,10 @@ export const runExtension = async () => {
 
 };
 
+const requestUpdateBadge = () => {
+    chrome.runtime.sendMessage(null, { message: 'UPDATE_BADGE', text: String(hiddenElements.length) }, null, () => {});
+};
+
 const hideElement = (el, reason) => {
     logger.debug('hiding element', el);
     const oldStyle = el.getAttribute('style');
@@ -45,6 +49,7 @@ const hideElement = (el, reason) => {
         });
         logger.debug({ hiddenElements });
     }
+    requestUpdateBadge();
 };
 
 const unhideAll = () => {
@@ -56,4 +61,14 @@ const unhideAll = () => {
             elData.el.removeAttribute('style');
         }
     });
+    chrome.runtime.sendMessage(null, { message: 'DISABLE_EXT', text: 'OFF' }, null, () => {});
 };
+
+chrome.runtime.onMessage.addListener((request) => {
+    if (request.message === 'UNHIDE') {
+        logger.debug('Unhiding');
+        unhideAll();
+    }
+    return true;
+});
+

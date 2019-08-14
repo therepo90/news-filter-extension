@@ -1,0 +1,48 @@
+<script src="popup.js"></script>
+<style>
+
+    html, body {
+        background: black;
+        padding:0;
+        margin:0;
+        font-size: 14px;
+    }
+    .link {
+        text-decoration: none;
+        color: white;
+    }
+
+    .link:hover {
+        color: #ffca00;
+    }
+
+    .container {
+        text-align: center;
+        color: white;
+        min-width: 180px;
+    }
+
+    .inner-container {
+        padding: 0.3rem 0.5rem;
+    }
+
+    .element {
+        cursor: pointer;
+
+    }
+
+    .element:not(:first-of-type) {
+        margin-top: 0.3rem;
+    }
+
+    .element:hover {
+        color: #ffca00;
+    }
+</style>
+<div class="container">
+    <div class="inner-container">
+        <div id="unhide" class="element">
+            Show hidden articles
+        </div>
+    </div>
+</div>

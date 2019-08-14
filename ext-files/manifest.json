@@ -1,16 +1,27 @@
 {
-    "name": "Bad news filter",
+    "name": "Wykop bad news filter",
     "version": "0.0.1",
     "author": "RepoGamesStudio",
     "description": "Filter bad news",
     "manifest_version": 2,
     "permissions": ["activeTab", "tabs"],
-
+    "background": {
+        "scripts": ["background.js"]
+    },
     "content_scripts": [
         {
             "matches": ["https://www.wykop.pl/"],
             "js": ["main.js"],
             "run_at": "document_end"
         }
-    ]
+    ],
+  "icons": { "128": "icon128.png", "48": "icon48.png" , "16": "icon16.png"  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icon16.png",
+      "24": "icon24.png",
+      "32": "icon32.png"
+    },
+    "default_popup": "popup.html"
+  }
 }
