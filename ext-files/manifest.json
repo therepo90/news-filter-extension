@@ -1,0 +1,16 @@
+{
+    "name": "Bad news filter",
+    "version": "0.0.1",
+    "author": "RepoGamesStudio",
+    "description": "Filter bad news",
+    "manifest_version": 2,
+    "permissions": ["activeTab", "tabs"],
+
+    "content_scripts": [
+        {
+            "matches": ["https://wykop.pl"],
+            "js": ["main.js"],
+            "run_at": "document_idle"
+        }
+    ]
+}
