@@ -1,12 +1,36 @@
 import { logger } from './logger';
+import { queryElements } from './utils';
+import { allSentencesMatcher } from './matchers';
 
 export const packageName = 'Bad news filter';
 const hiddenElements = [];
 
-export const runExtension = async () => {
-    logger.log(`%c${packageName} %cextension running`, 'color: orange;font-size:16px;', 'color:black;');
+function findParentLink(el) {
+    let node = el.parentNode;
+    while (node != document.body) {
+        if(node.matches('.link')) {
+            break;
+        }
+        node = node.parentNode;
+    }
+    return node;
+}
 
-    // wait for some root element
+export const runExtension = async () => {
+    logger.log(`%c${packageName} %cextension running`, 'color: green;font-size:16px;', 'color:black;');
+    const descSelector = `#itemsStream > .link .description > p > a`;
+    const titleSelector = `#itemsStream .lcontrast.m-reset-margin > h2`;
+    const root = document.body;
+    const elements = queryElements(titleSelector, root).concat(queryElements(descSelector, root));
+    elements.forEach(el => {
+        if(allSentencesMatcher(el.innerText)){
+            const node = findParentLink(el);
+            if(node) {
+                hideElement(node, 'allSentences')
+            }
+        }
+    });
+
 };
 
 const hideElement = (el, reason) => {
@@ -24,8 +48,7 @@ const hideElement = (el, reason) => {
 };
 
 const unhideAll = () => {
-    logger.debug('Unhidding items ', hiddenElements); // won't undo html overflows
-    disconnect();
+    logger.debug('Unhidding items ', hiddenElements);
     hiddenElements.forEach(elData => {
         if (elData.oldStyle) {
             elData.el.setAttribute('style', elData.oldStyle);
@@ -33,6 +56,4 @@ const unhideAll = () => {
             elData.el.removeAttribute('style');
         }
     });
-    const debugNode = document.querySelector('#rg-styles');
-    debugNode && debugNode.remove(); // only at top window
 };

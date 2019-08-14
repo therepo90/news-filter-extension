@@ -6,7 +6,7 @@ export const logger = {
     if(!devMode){
       return;
     }
-    console.log(...defaultArgs, ...args); // eslint-disable-line
+    console.log(...args); // eslint-disable-line
   },
   log(...args) {
     console.log(...args); // eslint-disable-line

@@ -20,7 +20,5 @@ export const allSentencesRegexp = createWordsInOrderRegexp(allSentences);
 
 export const allSentencesMatcher = text => {
     text = cleanText(text);
-    const match = text.match(allSentencesRegexp);
-    const multiMatches = match && text.split(' ').length > 5;
-    return multiMatches;
+    return text.match(allSentencesRegexp);
 };

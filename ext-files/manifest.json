@@ -8,9 +8,9 @@
 
     "content_scripts": [
         {
-            "matches": ["https://wykop.pl"],
+            "matches": ["https://www.wykop.pl/"],
             "js": ["main.js"],
-            "run_at": "document_idle"
+            "run_at": "document_end"
         }
     ]
 }
