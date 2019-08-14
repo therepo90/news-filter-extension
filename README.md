@@ -1,3 +1,3 @@
-# Wykop filter
+# Wykop news filter
 
-Get rid of bad news from you favourite news sites
+Usuwa negatywne newsy z wykopu, by karmić się tylko pozytywnymi informacjami.
