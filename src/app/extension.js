@@ -1,6 +1,7 @@
 import { logger } from './logger';
-import { queryElements } from './utils';
+import { cleanText, queryElements } from './utils';
 import { allSentencesMatcher } from './matchers';
+import { MSG_DISABLE_EXT, MSG_UNHIDE, MSG_UPDATE_BADGE } from './constants';
 
 export const packageName = 'Bad news filter';
 const hiddenElements = [];
@@ -30,11 +31,22 @@ export const runExtension = async () => {
             }
         }
     });
+    const sponsoredElementsSelectorMain = `#itemsStream .diggbox > a > span`;
+    const sponsoredElementsSelectorTop = `#dyingLinksBox .diggbox > a > span`;
+    const sponsoredElements = queryElements(sponsoredElementsSelectorMain, root).concat(queryElements(sponsoredElementsSelectorTop, root));
+    sponsoredElements.forEach(el => {
+        if(cleanText(el.innerText) === 'S'){
+            const node = findParentLink(el);
+            if(node) {
+                hideElement(node, 'Sponsored')
+            }
+        }
+    });
 
 };
 
 const requestUpdateBadge = () => {
-    chrome.runtime.sendMessage(null, { message: 'UPDATE_BADGE', text: String(hiddenElements.length) }, null, () => {});
+    chrome.runtime.sendMessage(null, { message: MSG_UPDATE_BADGE, text: String(hiddenElements.length) }, null, () => {});
 };
 
 const hideElement = (el, reason) => {
@@ -61,11 +73,11 @@ const unhideAll = () => {
             elData.el.removeAttribute('style');
         }
     });
-    chrome.runtime.sendMessage(null, { message: 'DISABLE_EXT', text: 'OFF' }, null, () => {});
+    chrome.runtime.sendMessage(null, { message: MSG_DISABLE_EXT, text: 'OFF' }, null, () => {});
 };
 
 chrome.runtime.onMessage.addListener((request) => {
-    if (request.message === 'UNHIDE') {
+    if (request.message === MSG_UNHIDE) {
         logger.debug('Unhiding');
         unhideAll();
     }

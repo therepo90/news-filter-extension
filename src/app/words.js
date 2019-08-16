@@ -25,8 +25,8 @@ const sadSentencesPL = [
         ['skazany', 'zatrzymany'],
     ],
     [
-        ['pobity', 'pobił'],
-        ['człowiek']
+        ['pobity', 'pobił', 'pobita'],
+        ['człowiek', 'mężczyzn', 'kobiet', 'dzieck', 'osoba', 'osoby']
     ],
     [
         ['kradzież', 'skradzion', 'okraść', 'kraść'],
@@ -57,11 +57,25 @@ const sadSentencesPL = [
     [
         ['gwałty','gwałtu', 'gwałtów'],
     ],[
-        ['śmiertelny wypadek'],
+        ['śmierteln'],
+        ['wypadek', 'wypadku'],
     ],
     [
         ['sekcj'],
         ['zwłok'],
+    ],
+    [
+        ['list gończy'],
+    ],
+    [
+        ['brutalnie'],
+    ],[
+        ['kolizj'],
+        ['rower', 'drodze'],
+    ],
+    [
+        ['agresj'],
+        ['drodze', 'drogow'],
     ],
 ];
 
