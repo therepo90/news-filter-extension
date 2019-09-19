@@ -2,6 +2,7 @@ import { logger } from './logger';
 import { cleanText, queryElements } from './utils';
 import { allSentencesMatcher } from './matchers';
 import { MSG_DISABLE_EXT, MSG_UNHIDE, MSG_UPDATE_BADGE } from './constants';
+import { bannedTags } from './tags';
 
 export const packageName = 'Bad news filter';
 const hiddenElements = [];
@@ -21,6 +22,7 @@ export const runExtension = async () => {
     logger.log(`%c${packageName} %cextension running`, 'color: green;font-size:16px;', 'color:black;');
     const descSelector = `#itemsStream > .link .description > p > a`;
     const titleSelector = `#itemsStream .lcontrast.m-reset-margin > h2`;
+
     const root = document.body;
     const elements = queryElements(titleSelector, root).concat(queryElements(descSelector, root));
     elements.forEach(el => {
@@ -38,7 +40,17 @@ export const runExtension = async () => {
         if(cleanText(el.innerText) === 'S'){
             const node = findParentLink(el);
             if(node) {
-                hideElement(node, 'Sponsored')
+                hideElement(node, 'sponsored')
+            }
+        }
+    });
+    const tagsSelector = `#itemsStream .lcontrast.m-reset-margin .tag.affect`;
+    const tagsElements = queryElements(tagsSelector, root);
+    tagsElements.forEach(el => {
+        if(bannedTags.includes(cleanText(el.innerText))){
+            const node = findParentLink(el);
+            if(node) {
+                hideElement(node, 'bannedTag')
             }
         }
     });
