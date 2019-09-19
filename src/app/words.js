@@ -1,6 +1,42 @@
 const sadSentencesPL = [
     [
-        ['zabił', 'zgwałcił', 'gwałcił'],
+        ['zabił', 'zgwałcił', 'gwałcił', 'zabili'],
+    ],
+    [
+        ['zamordowanie']
+    ],
+    [
+        ['morderstwo']
+    ],
+    [
+        ['trup']
+    ],
+    [
+        ['dożywocie']
+    ],
+    [
+        ['wyłudzał']
+    ],
+    [
+        ['okrucieństwo']
+    ],
+    [
+        ['odnaleziono'],
+        ['ciało', 'zwłoki']
+    ],
+    [
+        ['okładał'],
+        ['pięściami']
+    ],
+    [
+        ['znęcał', 'znęcanie'],
+    ],
+    [
+        ['zakopał', 'zakopali', 'zakopała', 'zakopano'],
+        ['w lesie'],
+    ],
+    [
+        ['rozstrzel'], // rozstrzelano etc
     ],
     [
         ['nie żyje', 'zginęła','zginął', 'zmarł'],
@@ -10,7 +46,7 @@ const sadSentencesPL = [
         ['wypadku']
     ],
     [
-        ['potrącona', 'potrącen'],
+        ['potrącona', 'potrącen', 'potrącił'],
     ],
     [
         ['zarzuty'],
@@ -25,7 +61,11 @@ const sadSentencesPL = [
         ['skazany', 'zatrzymany'],
     ],
     [
-        ['pobity', 'pobił', 'pobita'],
+        ['wydłub'],
+        ['oczy', 'oko'],
+    ],
+    [
+        ['pobity', 'pobił', 'pobita', 'pobili', 'uderz'],
         ['człowiek', 'mężczyzn', 'kobiet', 'dzieck', 'osoba', 'osoby']
     ],
     [
@@ -76,6 +116,11 @@ const sadSentencesPL = [
     [
         ['agresj'],
         ['drodze', 'drogow'],
+    ],
+    [
+        ['stan'],
+        ['jest'],
+        ['ciężki'],
     ],
 ];
 
